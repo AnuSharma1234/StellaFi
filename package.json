@@ -1,13 +1,14 @@
 {
     "scripts": {
-        "client" : "cd client && npm run dev",
-        "server" : "cd server && npm run dev",
-        "dev" : "concurrently \"npm run client\" \"npm run server\""
+        "client": "cd client && npm run dev",
+        "server": "cd server && npm run dev",
+        "dev": "concurrently \"npm run client\" \"npm run server\""
     },
-  "dependencies": {
-    "@stellar/stellar-sdk": "^13.3.0"
-  },
-  "devDependencies": {
-    "concurrently": "^9.2.0"
-  }
+    "dependencies": {
+        "@stellar/stellar-sdk": "^13.3.0",
+        "dotenv": "^17.2.1"
+    },
+    "devDependencies": {
+        "concurrently": "^9.2.0"
+    }
 }
