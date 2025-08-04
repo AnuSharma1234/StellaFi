@@ -6,6 +6,7 @@ import { configDotenv } from 'dotenv';
 const app = express();
 
 app.use(cors())
+app.use(express.json())
 
 configDotenv({
     path : '.env'
