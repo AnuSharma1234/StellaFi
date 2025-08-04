@@ -1,12 +1,12 @@
 import "./App.css";
+import { WalletProvider } from "./provider/key.provider";
+import Routes from "./routes";
 
 function App() {
   return (
-    <>
-      <div className="">
-        <h2 className="text-5xl text-center m-4 text-amber-400">StellaFi</h2>
-      </div>
-    </>
+    <WalletProvider>
+        <Routes/>
+    </WalletProvider>
   );
 }
 
