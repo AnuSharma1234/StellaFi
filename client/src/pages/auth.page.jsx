@@ -1,19 +1,8 @@
 import { Wallet, ExternalLink } from 'lucide-react';
 import {toast , ToastContainer} from 'react-toastify'
 import {isConnected, requestAccess} from '@stellar/freighter-api'
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useWallet } from '../provider/key.provider';
 
 export default function Auth() {
-    const navigate = useNavigate()
-    const publicKey = useWallet()
-
-    useEffect(() => {
-        if(publicKey){
-            navigate('/')
-        }
-    }, [publicKey, navigate]) // Add proper dependencies
 
     const handleError = (error) => {
         toast.error(error, {
