@@ -33,8 +33,8 @@ const Routes = () =>{
     ]
 
     const router = createBrowserRouter([
-        ...(!publicKey ? routesForNotAuthenticatedOnly : []),
-        ...routesForAuthenticatedOnly
+        ...(publicKey ? routesForAuthenticatedOnly : []),
+        ...routesForNotAuthenticatedOnly
     ])
 
     return <RouterProvider router={router}/>
