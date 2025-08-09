@@ -1,8 +1,10 @@
 import { Wallet, ExternalLink } from 'lucide-react';
 import {toast , ToastContainer} from 'react-toastify'
 import {isConnected, requestAccess} from '@stellar/freighter-api'
+import { useNavigate } from 'react-router-dom';
 
 export default function Auth() {
+    const navigate = useNavigate()
 
     const handleError = (error) => {
         toast.error(error, {
@@ -32,9 +34,8 @@ export default function Auth() {
                 localStorage.setItem('pubKey', pubKey)
                 console.log(`Connected to ${pubKey}`)
                 handleSuccess(`Connected successfully`)
-                // Force navigation after setting localStorage
-                window.location.href = '/'
-            }
+                navigate('/auth/profile')
+          }
 
         } catch(error) {
             handleError('Cannot connect to the wallet')

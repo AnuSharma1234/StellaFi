@@ -1,27 +1,19 @@
 import mongoose from "mongoose";
 
 const userSchema = mongoose.Schema({
-    walletAddress : {
+    publicKey : {
         type : String,
         required : true,
         unique : true,
-        lowercase : true
     },
-    nonce : {
-        type : String,
-        required : true
+    name : {
+        type : String
     },
-    username : String,
-    bio : String,
-    profileImage : String,
-    createdAt : {
-        type : Date,
-        default : Date.now
+    email : {
+        type : String
     },
-    lastLogin : Date,
-    isActive : {
-        type : Boolean,
-        default : true,
+    xp : {
+        type : Number
     }
 })
 

@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import { connectDb } from './db/index.js';
 import { configDotenv } from 'dotenv';
+import authRouter from './routes/auth.routes.js';
 
 const app = express();
 
@@ -12,8 +13,9 @@ configDotenv({
     path : '.env'
 })
 
+app.use('/auth', authRouter)
+
 app.listen(process.env.PORT, (req,res) => {
     console.log(`Server started on PORT : ${process.env.PORT}`)
     connectDb();
 })
-
