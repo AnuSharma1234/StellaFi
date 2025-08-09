@@ -8,9 +8,9 @@ const TopBar = () => {
       {/* Left side - Logo */}
       <div className="flex items-center space-x-4">
         <div className="flex items-center space-x-3">
-          <div className="w-11 h-11 bg-gradient-to-br from-twitter-blue to-purple-500 rounded-2xl flex items-center justify-center shadow-lg shadow-twitter-blue/20">
+          {/* <div className="w-11 h-11 rounded-2xl flex items-center justify-center shadow-lg shadow-twitter-blue/20">
             <span className="text-xl">🐦</span>
-          </div>
+          </div> */}
           <div className="hidden md:block">
             <h2 className="text-xl font-bold font-heading text-twitter-white">Home</h2>
           </div>
@@ -79,7 +79,7 @@ const TopBar = () => {
         <div className="flex items-center space-x-3 group cursor-pointer modern-button p-2 rounded-2xl">
           <div className="relative">
             <img
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face"
+              src="/stellafi.png"
               alt="Profile"
               className="w-10 h-10 rounded-2xl transition-all duration-300 group-hover:scale-105 shadow-lg"
             />
@@ -87,7 +87,7 @@ const TopBar = () => {
           </div>
           <div className="hidden lg:block">
             <div className="text-twitter-white font-semibold font-body text-base">StellaFi</div>
-            <div className="text-twitter-muted font-body text-sm">@StellaFi</div>
+            <div className="text-twitter-muted font-body text-sm">@joinStellaFi</div>
           </div>
           <svg className="w-4 h-4 text-twitter-muted group-hover:text-twitter-white transition-colors hidden lg:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />

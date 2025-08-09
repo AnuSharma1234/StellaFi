@@ -34,7 +34,7 @@ export default function Auth() {
                 localStorage.setItem('pubKey', pubKey)
                 console.log(`Connected to ${pubKey}`)
                 handleSuccess(`Connected successfully`)
-                navigate('/auth/profile')
+                navigate('/discover')
           }
 
         } catch(error) {
@@ -46,7 +46,7 @@ export default function Auth() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-400 via-purple-500 to-purple-600 flex items-center justify-center p-4">
       {/* Main Modal */}
-      <div className="bg-twitter-darker rounded-2xl p-8 w-full max-w-md shadow-2xl border border-twitter-border/20">
+      <div className="bg-twitter-darker rounded-2xl p-8 w-full max-w-md shadow-2xl border border-twitter-border/20 bg-blue-900">
         {/* Wallet Icon */}
         <div className="flex justify-center mb-6">
           <div className="w-16 h-16 bg-gradient-to-br from-twitter-blue to-purple-500 rounded-2xl flex items-center justify-center shadow-lg">

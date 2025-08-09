@@ -10,7 +10,7 @@ const Wallet = () => {
   }
 
   const assets = [
-    { name: 'Ethereum', symbol: 'ETH', amount: '2.45', value: '$5,746.89', change: '+5.2%', positive: true },
+    { name: 'Lumens', symbol: 'XLM', amount: '0.45', value: '$5,746.89', change: '+0.38%', positive: true },
     { name: 'Bitcoin', symbol: 'BTC', amount: '0.15', value: '$6,481.63', change: '+2.8%', positive: true },
     { name: 'USD Coin', symbol: 'USDC', amount: '150.00', value: '$150.00', change: '0.0%', positive: true },
     { name: 'Solana', symbol: 'SOL', amount: '12.8', value: '$1,260.16', change: '-1.3%', positive: false },

@@ -13,7 +13,7 @@ const Discover = () => {
       user: {
         name: 'Satoshi Nakamoto',
         handle: '@satoshi',
-        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face',
+        avatar: '/satoshi.jpg',
         verified: true
       },
       time: '2h',
@@ -289,7 +289,7 @@ const Discover = () => {
       <div className="m-4 p-6 bg-transparent">
         <div className="flex space-x-2 bg-[#181A1E] p-2 rounded-2xl">
           <img
-            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face"
+            src="/stellafi.png"
             alt="Your avatar"
             className="w-14 h-14 rounded-2xl shadow-lg flex-shrink-0 m-4"
           />

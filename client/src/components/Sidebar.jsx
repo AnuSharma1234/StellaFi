@@ -71,10 +71,8 @@ const LeftSidebar = () => {
       <div className="relative z-10 p-6">
         <div className="modern-card p-4">
           <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-twitter-blue to-purple-500 rounded-3xl flex items-center justify-center shadow-lg shadow-twitter-blue/20">
-               <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-              </svg>
+            <div className="w-12 h-12  rounded-3xl flex items-center justify-center shadow-lg shadow-twitter-blue/20">
+              <img src='/stellafi.png'></img>
             </div>
             <div>
               <h1 className="text-2xl font-bold font-heading text-twitter-white">StellaFi</h1>
@@ -114,10 +112,10 @@ const LeftSidebar = () => {
       <div className="relative z-10 p-4">
         <button className="w-full bg-gradient-to-r from-twitter-blue to-purple-500 hover:shadow-2xl hover:shadow-twitter-blue/30 text-white font-bold py-5 px-6 rounded-3xl transition-all duration-300 transform hover:scale-105 active:scale-95 group modern-card">
           <div className="flex items-center justify-center space-x-3">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {/* <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-            </svg>
-            <span className="text-lg font-semibold font-heading">Create Post</span>
+            </svg> */}
+            <span className="text-lg font-semibold font-heading">🚀&nbsp;&nbsp;Launch</span>
           </div>
         </button>
       </div>
@@ -128,15 +126,15 @@ const LeftSidebar = () => {
           <div className="flex items-center space-x-3">
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face"
+                src="/stellafi.png"
                 alt="Profile"
                 className="w-12 h-12 rounded-2xl transition-all duration-300 shadow-lg"
               />
               <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-twitter-success rounded-full shadow-md"></div>
             </div>
             <div className="flex-1">
-              <div className="text-twitter-white font-semibold font-body text-base">StellaFi User</div>
-              <div className="text-twitter-muted text-sm font-body">@stellafi_user</div>
+              <div className="text-twitter-white font-semibold font-body text-base">StellaFi</div>
+              <div className="text-twitter-muted text-sm font-body">@joinStellaFi</div>
             </div>
             <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <svg className="w-5 h-5 text-twitter-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">

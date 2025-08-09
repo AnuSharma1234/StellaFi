@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 
 const DEX = () => {
   const [activeTab, setActiveTab] = useState('trade')
-  const [fromToken, setFromToken] = useState('ETH')
+  const [fromToken, setFromToken] = useState('XLM')
   const [toToken, setToToken] = useState('USDC')
   const [fromAmount, setFromAmount] = useState('')
   const [toAmount, setToAmount] = useState('')
 
   const trendingTokens = [
-    { name: 'Ethereum', symbol: 'ETH', price: '$2,345.67', change: '+5.2%', volume: '$1.2B', positive: true, icon: (
+    { name: 'XLM', symbol: 'XLM', price: '$2,345.67', change: '+5.2%', volume: '$1.2B', positive: true, icon: (
       <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
         <path d="M11.944 17.97L4.58 13.62 11.943 24l7.37-10.38-7.372 4.35h.003zM12.056 0L4.69 12.223l7.365 4.354 7.365-4.35L12.056 0z"/>
       </svg>
@@ -50,7 +50,7 @@ const DEX = () => {
             onChange={(e) => onChange(e.target.value)}
             className="bg-transparent text-twitter-white text-xl font-semibold focus:outline-none cursor-pointer hover:text-twitter-blue transition-colors"
           >
-            <option value="ETH">ETH</option>
+            <option value="XLM">XLM</option>
             <option value="BTC">BTC</option>
             <option value="USDC">USDC</option>
             <option value="SOL">SOL</option>
@@ -189,7 +189,7 @@ const DEX = () => {
                   <div className="space-y-3">
                     <div className="flex justify-between text-base">
                       <span className="text-twitter-lightGray">Exchange Rate</span>
-                      <span className="text-twitter-white font-medium">1 ETH = 2,345.67 USDC</span>
+                      <span className="text-twitter-white font-medium">1 XLM = 2,345.67 USDC</span>
                     </div>
                     <div className="flex justify-between text-base">
                       <span className="text-twitter-lightGray">Network Fee</span>
