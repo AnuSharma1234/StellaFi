@@ -58,26 +58,26 @@ const Sidebar = ({ currentPage, setCurrentPage }) => {
             </svg>
           </div>
           <div>
-            <h1 className="text-xl font-bold text-twitter-white">StellaFi</h1>
-            <p className="text-twitter-lightGray text-sm">Web3 Edition</p>
+            <h1 className="text-2xl font-bold font-heading text-twitter-white">StellaFi</h1>
+            <p className="text-twitter-muted text-base font-body">Web3 Edition</p>
           </div>
         </div>
       </div>
       
       {/* Navigation */}
-      <nav className="relative z-10 flex-1 px-4 py-6 space-y-2">
+      <nav className="relative z-10 flex-1 px-4 py-2 space-y-1">
         {menuItems.map((item, index) => (
           <button
             key={item.id}
             onClick={() => setCurrentPage(item.id)}
-            className={`group w-full flex items-center space-x-4 p-4 rounded-2xl text-left transition-all duration-300 transform hover:scale-105 ${
+            className={`group w-full flex items-center space-x-4 p-3 rounded-2xl text-left transition-all duration-300 transform hover:scale-105 ${
               currentPage === item.id
                 ? 'bg-gradient-to-r from-twitter-blue/20 to-purple-500/20 text-twitter-white shadow-lg border border-twitter-blue/30'
-                : 'text-twitter-lightGray hover:bg-twitter-surface/50 hover:text-twitter-white'
+                : 'text-twitter-muted hover:bg-twitter-surface/50 hover:text-twitter-white'
             }`}
             style={{ animationDelay: `${index * 0.1}s` }}
           >
-            <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${
+            <div className={`w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 ${
               currentPage === item.id 
                 ? `bg-gradient-to-br ${item.gradient} shadow-lg`
                 : 'bg-twitter-surface group-hover:bg-twitter-border'
@@ -85,7 +85,7 @@ const Sidebar = ({ currentPage, setCurrentPage }) => {
               {item.icon}
             </div>
             <div className="flex-1">
-              <span className="text-lg font-semibold">{item.label}</span>
+              <span className="text-lg font-semibold font-heading">{item.label}</span>
               {currentPage === item.id && (
                 <div className="w-full h-0.5 bg-gradient-to-r from-twitter-blue to-transparent mt-1 animate-slide-up"></div>
               )}
@@ -104,7 +104,7 @@ const Sidebar = ({ currentPage, setCurrentPage }) => {
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
             </svg>
-            <span className="text-lg">Tweet</span>
+            <span className="text-lg font-semibold font-heading">Tweet</span>
           </div>
         </button>
       </div>
@@ -121,11 +121,11 @@ const Sidebar = ({ currentPage, setCurrentPage }) => {
             <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-twitter-success rounded-full border-2 border-twitter-background"></div>
           </div>
           <div className="flex-1">
-            <div className="text-twitter-white font-semibold">StellaFi</div>
-            <div className="text-twitter-lightGray text-sm">@StellaFi</div>
+            <div className="text-twitter-white font-semibold font-body text-base">StellaFi</div>
+            <div className="text-twitter-muted text-sm font-body">@StellaFi</div>
           </div>
           <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <svg className="w-5 h-5 text-twitter-lightGray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-twitter-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01" />
             </svg>
           </div>

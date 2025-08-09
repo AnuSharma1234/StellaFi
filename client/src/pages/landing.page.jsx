@@ -9,13 +9,16 @@ export default function Landing() {
     };
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center">
-            <h1 className="text-2xl font-bold mb-4">StellaFi</h1>
+        <div className="min-h-screen flex flex-col items-center justify-center bg-twitter-black">
+            <h1 className="text-4xl font-bold font-heading text-twitter-white mb-8">StellaFi</h1>
+            <p className="text-xl font-body text-twitter-lightGray mb-8 text-center max-w-md">
+                The next generation Web3 social platform
+            </p>
             <button 
                 onClick={handleAuthButton}
-                className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                className="px-8 py-4 bg-gradient-to-r from-twitter-blue to-purple-500 text-white text-lg font-semibold font-heading rounded-2xl hover:shadow-lg hover:shadow-twitter-blue/25 transition-all duration-300 transform hover:scale-105"
             >
-                Auth Button
+                Get Started
             </button>
         </div>
     )

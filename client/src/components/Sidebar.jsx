@@ -63,43 +63,48 @@ const LeftSidebar = () => {
   ]
 
   return (
-    <div className="w-72 xl:w-80 bg-twitter-darker flex flex-col min-h-screen relative overflow-hidden border-r border-twitter-border/20">
+    <div className="w-72 xl:w-80 bg-twitter-darker/80 backdrop-blur-xl flex flex-col min-h-screen relative overflow-hidden">
+      {/* Decorative gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-twitter-blue/5 via-transparent to-purple-500/5 pointer-events-none" />
+      
       {/* Header */}
       <div className="relative z-10 p-6">
-        <div className="flex items-center space-x-3">
-          <div className="w-12 h-12 bg-gradient-to-br from-twitter-blue to-purple-500 rounded-2xl flex items-center justify-center shadow-lg">
-             <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-            </svg>
-          </div>
-          <div>
-            <h1 className="text-xl font-bold text-twitter-white">StellaFi</h1>
-            <p className="text-twitter-lightGray text-sm">Web3 Social</p>
+        <div className="modern-card p-4">
+          <div className="flex items-center space-x-3">
+            <div className="w-12 h-12 bg-gradient-to-br from-twitter-blue to-purple-500 rounded-3xl flex items-center justify-center shadow-lg shadow-twitter-blue/20">
+               <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold font-heading text-twitter-white">StellaFi</h1>
+              <p className="text-twitter-muted text-base font-body">Web3 Social</p>
+            </div>
           </div>
         </div>
       </div>
       
       {/* Navigation */}
-      <nav className="relative z-10 flex-1 px-4 py-6 space-y-2">
+      <nav className="relative z-10 flex-1 px-4 py-2 space-y-2">
         {menuItems.map((item) => (
           <button
             key={item.id}
             onClick={() => navigate(`/${item.id}`)}
-            className={`group w-full flex items-center space-x-4 p-4 rounded-2xl text-left transition-all duration-300 transform hover:scale-[1.02] ${
+            className={`group w-full flex items-center space-x-4 p-4 rounded-3xl text-left transition-all duration-300 transform hover:scale-[1.02] ${
               currentPage === item.id
-                ? 'bg-twitter-blue/10 text-twitter-white shadow-lg'
-                : 'text-twitter-lightGray hover:bg-twitter-surface/50 hover:text-twitter-white'
+                ? 'modern-card bg-twitter-blue/15 text-twitter-white shadow-lg shadow-twitter-blue/10'
+                : 'text-twitter-muted hover:bg-white/5 hover:text-twitter-white modern-button'
             }`}
           >
-            <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${
+            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 ${
               currentPage === item.id 
-                ? `bg-gradient-to-br ${item.gradient} text-white shadow-lg`
-                : 'bg-twitter-surface group-hover:bg-twitter-border text-twitter-lightGray group-hover:text-twitter-white'
+                ? `bg-gradient-to-br ${item.gradient} text-white shadow-lg shadow-twitter-blue/20`
+                : 'bg-white/5 group-hover:bg-white/10 text-twitter-muted group-hover:text-twitter-white backdrop-blur-sm'
             }`}>
               {item.icon}
             </div>
             <div className="flex-1">
-              <span className="text-lg font-semibold">{item.label}</span>
+              <span className="text-lg font-semibold font-heading">{item.label}</span>
             </div>
           </button>
         ))}
@@ -107,35 +112,37 @@ const LeftSidebar = () => {
       
       {/* Tweet Button */}
       <div className="relative z-10 p-4">
-        <button className="w-full bg-gradient-to-r from-twitter-blue to-purple-500 hover:shadow-2xl hover:shadow-twitter-blue/25 text-white font-bold py-4 px-6 rounded-2xl transition-all duration-300 transform hover:scale-105 active:scale-95 group">
-          <div className="flex items-center justify-center space-x-2">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button className="w-full bg-gradient-to-r from-twitter-blue to-purple-500 hover:shadow-2xl hover:shadow-twitter-blue/30 text-white font-bold py-5 px-6 rounded-3xl transition-all duration-300 transform hover:scale-105 active:scale-95 group modern-card">
+          <div className="flex items-center justify-center space-x-3">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
             </svg>
-            <span className="text-lg">Tweet</span>
+            <span className="text-lg font-semibold font-heading">Create Post</span>
           </div>
         </button>
       </div>
 
       {/* Profile Section */}
       <div className="relative z-10 p-4">
-        <div className="flex items-center space-x-3 p-3 rounded-2xl hover:bg-twitter-surface/50 transition-all duration-300 cursor-pointer group">
-          <div className="relative">
-            <img
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face"
-              alt="Profile"
-              className="w-12 h-12 rounded-full ring-2 ring-transparent group-hover:ring-twitter-blue/30 transition-all duration-300"
-            />
-            <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-twitter-success rounded-full border-2 border-twitter-darker"></div>
-          </div>
-          <div className="flex-1">
-            <div className="text-twitter-white font-semibold">StellaFi User</div>
-            <div className="text-twitter-lightGray text-sm">@stellafi_user</div>
-          </div>
-          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <svg className="w-5 h-5 text-twitter-lightGray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01" />
-            </svg>
+        <div className="modern-card p-4 hover:bg-white/5 transition-all duration-300 cursor-pointer group">
+          <div className="flex items-center space-x-3">
+            <div className="relative">
+              <img
+                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face"
+                alt="Profile"
+                className="w-12 h-12 rounded-2xl transition-all duration-300 shadow-lg"
+              />
+              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-twitter-success rounded-full shadow-md"></div>
+            </div>
+            <div className="flex-1">
+              <div className="text-twitter-white font-semibold font-body text-base">StellaFi User</div>
+              <div className="text-twitter-muted text-sm font-body">@stellafi_user</div>
+            </div>
+            <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <svg className="w-5 h-5 text-twitter-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01" />
+              </svg>
+            </div>
           </div>
         </div>
       </div>

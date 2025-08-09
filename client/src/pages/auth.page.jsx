@@ -46,42 +46,42 @@ export default function Auth() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-400 via-purple-500 to-purple-600 flex items-center justify-center p-4">
       {/* Main Modal */}
-      <div className="bg-gray-900 rounded-2xl p-8 w-full max-w-md shadow-2xl">
+      <div className="bg-twitter-darker rounded-2xl p-8 w-full max-w-md shadow-2xl border border-twitter-border/20">
         {/* Wallet Icon */}
         <div className="flex justify-center mb-6">
-          <div className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center">
-            <Wallet className="w-6 h-6 text-gray-300" />
+          <div className="w-16 h-16 bg-gradient-to-br from-twitter-blue to-purple-500 rounded-2xl flex items-center justify-center shadow-lg">
+            <Wallet className="w-8 h-8 text-white" />
           </div>
         </div>
 
         {/* WalletAuth Branding */}
         <div className="flex items-center justify-center mb-8">
-          <span className="text-white text-xl font-bold">StellaFi</span>
+          <span className="text-white text-3xl font-bold font-heading">StellaFi</span>
         </div>
 
         {/* Main Heading */}
-        <h1 className="text-white text-2xl font-semibold text-center mb-6 leading-tight">
+        <h1 className="text-white text-2xl font-semibold font-heading text-center mb-6 leading-tight">
             Sign-in with your Stellar Wallet
         </h1>
 
         {/* Description */}
-        <p className="text-gray-400 text-center text-m leading-relaxed mb-8">
+        <p className="text-twitter-lightGray text-center text-lg font-body leading-relaxed mb-8">
             Secure access via Freighter
         </p>
 
         {/* Connect Wallet Button */}
-        <button onClick={connectWallet} className="w-full bg-white text-gray-900 font-medium py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors flex items-center justify-center space-x-2 mb-8">
-          <Wallet className="w-4 h-4" />
+        <button onClick={connectWallet} className="w-full bg-gradient-to-r from-twitter-blue to-purple-500 text-white font-semibold font-heading text-lg py-4 px-6 rounded-2xl hover:shadow-lg hover:shadow-twitter-blue/25 transition-all duration-300 flex items-center justify-center space-x-3 mb-8 transform hover:scale-105">
+          <Wallet className="w-5 h-5" />
           <span className='cursor-pointer'>Connect Wallet</span>
         </button>
 
          <div className="text-center mb-8">
-            <p className="text-gray-300 text-sm mb-3">
+            <p className="text-twitter-lightGray text-base font-body mb-3">
               Don't have a wallet?
             </p>
             <button
-              className="inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200 hover:underline"
-              style={{ color: '#4EA5D9' }}
+              className="inline-flex items-center gap-2 text-base font-semibold font-body transition-colors duration-200 hover:underline"
+              style={{ color: '#1DA1F2' }}
             >
               Install Freighter
               <ExternalLink className="w-4 h-4" />
@@ -89,12 +89,12 @@ export default function Auth() {
           </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-center text-xs text-gray-500">
-          <div className="flex items-center space-x-1 text-m">
+        <div className="flex items-center justify-center text-sm text-twitter-lightGray">
+          <div className="flex items-center space-x-1 font-body">
             <span>Follow StellaFi on</span>
             <ExternalLink className="w-3 h-3" />
-            <span className="text-gray-400">•</span>
-            <span className='font-bold text-m'>X</span>
+            <span className="text-twitter-lightGray">•</span>
+            <span className='font-bold'>X</span>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import TopBar from '../components/TopBar'
 
 const Discover = () => {
   const [activeTab, setActiveTab] = useState('discover')
@@ -131,9 +132,14 @@ const Discover = () => {
     const isRetweeted = retweetedPosts.has(post.id)
 
     return (
-      <article className="px-4 py-6 hover:bg-twitter-surface/20 transition-all duration-300 group cursor-pointer">
+      <article 
+        className="p-6 transition-all duration-300 group cursor-pointer rounded-3xl mx-4 my-2 shadow-lg hover:shadow-xl" 
+        style={{ backgroundColor: '#181A1E' }}
+        onMouseEnter={(e) => e.target.style.backgroundColor = '#1F2226'}
+        onMouseLeave={(e) => e.target.style.backgroundColor = '#181A1E'}
+      >
         {post.trending && (
-          <div className="flex items-center mb-3 text-twitter-lightGray text-sm ml-14">
+          <div className="flex items-center mb-4 text-twitter-subtle text-sm ml-16">
             <svg className="w-4 h-4 mr-2 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clipRule="evenodd" />
             </svg>
@@ -141,16 +147,16 @@ const Discover = () => {
           </div>
         )}
         
-        <div className="flex space-x-3">
+        <div className="flex space-x-4">
           <div className="flex-shrink-0">
             <div className="relative group/avatar">
               <img
                 src={post.user.avatar}
                 alt={post.user.name}
-                className="w-12 h-12 rounded-full ring-2 ring-transparent group-hover/avatar:ring-twitter-blue/30 transition-all duration-300"
+                className="w-14 h-14 rounded-2xl transition-all duration-300 shadow-lg"
               />
               {post.user.verified && (
-                <div className="absolute -bottom-0.5 -right-0.5 w-5 h-5 bg-twitter-blue rounded-full flex items-center justify-center border-2 border-twitter-background shadow-lg">
+                <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-gradient-to-r from-twitter-blue to-purple-500 rounded-full flex items-center justify-center shadow-lg">
                   <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
@@ -160,15 +166,15 @@ const Discover = () => {
           </div>
           
           <div className="flex-1 min-w-0">
-            <div className="flex items-center space-x-2 mb-1">
-              <span className="font-bold text-twitter-white hover:underline cursor-pointer truncate">
+            <div className="flex items-center space-x-2 mb-2">
+              <span className="font-bold text-twitter-white hover:underline cursor-pointer truncate text-base">
                 {post.user.name}
               </span>
-              <span className="text-twitter-lightGray truncate">
+              <span className="text-twitter-muted truncate text-base">
                 {post.user.handle}
               </span>
-              <span className="text-twitter-lightGray">·</span>
-              <span className="text-twitter-lightGray hover:underline cursor-pointer flex-shrink-0">
+              <span className="text-twitter-subtle">·</span>
+              <span className="text-twitter-muted hover:underline cursor-pointer flex-shrink-0 text-base">
                 {post.time}
               </span>
               {post.hasThread && (
@@ -183,12 +189,12 @@ const Discover = () => {
               )}
             </div>
             
-            <div className="text-twitter-white mb-3 leading-relaxed whitespace-pre-wrap">
+            <div className="text-twitter-white mb-4 leading-relaxed whitespace-pre-wrap text-body text-base">
               {post.content}
             </div>
             
             {post.image && (
-              <div className="mb-4 rounded-2xl border border-twitter-border/30 overflow-hidden bg-twitter-surface/20">
+              <div className="mb-4 rounded-3xl overflow-hidden shadow-lg">
                 <img
                   src={post.image}
                   alt="Post content"
@@ -197,9 +203,9 @@ const Discover = () => {
               </div>
             )}
             
-            <div className="flex items-center justify-between max-w-md mt-3">
-              <button className="flex items-center space-x-2 text-twitter-lightGray hover:text-twitter-blue transition-colors duration-200 group/btn">
-                <div className="p-2 rounded-full group-hover/btn:bg-twitter-blue/10 transition-colors duration-200">
+            <div className="flex items-center justify-between max-w-md mt-4">
+              <button className="flex items-center space-x-2 text-twitter-muted hover:text-twitter-blue transition-colors duration-200 group/btn">
+                <div className="p-3 rounded-2xl group-hover/btn:bg-twitter-blue/10 transition-colors duration-200">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
@@ -210,10 +216,10 @@ const Discover = () => {
               <button 
                 onClick={() => handleRetweet(post.id)} 
                 className={`flex items-center space-x-2 transition-colors duration-200 group/btn ${
-                  isRetweeted ? 'text-green-400' : 'text-twitter-lightGray hover:text-green-400'
+                  isRetweeted ? 'text-green-400' : 'text-twitter-muted hover:text-green-400'
                 }`}
               >
-                <div className={`p-2 rounded-full transition-colors duration-200 ${
+                <div className={`p-3 rounded-2xl transition-colors duration-200 ${
                   isRetweeted ? 'bg-green-400/20' : 'group-hover/btn:bg-green-400/10'
                 }`}>
                   <svg className={`w-5 h-5 transition-transform duration-200 ${isRetweeted ? 'scale-110' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -226,10 +232,10 @@ const Discover = () => {
               <button 
                 onClick={() => handleLike(post.id)} 
                 className={`flex items-center space-x-2 transition-colors duration-200 group/btn ${
-                  isLiked ? 'text-red-500' : 'text-twitter-lightGray hover:text-red-500'
+                  isLiked ? 'text-red-500' : 'text-twitter-muted hover:text-red-500'
                 }`}
               >
-                <div className={`p-2 rounded-full transition-colors duration-200 ${
+                <div className={`p-3 rounded-2xl transition-colors duration-200 ${
                   isLiked ? 'bg-red-500/20' : 'group-hover/btn:bg-red-500/10'
                 }`}>
                   <svg className={`w-5 h-5 transition-transform duration-200 ${isLiked ? 'scale-110' : ''}`} fill={isLiked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
@@ -239,7 +245,7 @@ const Discover = () => {
                 <span className="text-sm font-medium">{post.likes + (isLiked ? 1 : 0)}</span>
               </button>
               
-              <button className="p-2 rounded-full text-twitter-lightGray hover:text-twitter-blue hover:bg-twitter-blue/10 transition-colors duration-200">
+              <button className="p-3 rounded-2xl text-twitter-muted hover:text-twitter-blue hover:bg-twitter-blue/10 transition-colors duration-200">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                 </svg>
@@ -252,56 +258,59 @@ const Discover = () => {
   }
 
   return (
-    <div className="w-full min-h-screen bg-twitter-background border-x border-twitter-border/20">
-      {/* Header with Sticky Navigation */}
-      <div className="sticky top-0 z-40 backdrop-blur-xl bg-twitter-background/95 border-b border-twitter-border/20">
-        <div className="flex">
-          {['discover', 'videos'].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`flex-1 py-4 text-center font-semibold transition-all duration-300 relative ${
-                activeTab === tab
-                  ? 'text-twitter-white'
-                  : 'text-twitter-lightGray hover:text-twitter-white hover:bg-twitter-surface/20'
-              }`}
-            >
-              <span className="capitalize text-lg">{tab}</span>
-              {activeTab === tab && (
-                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-twitter-blue to-purple-500 rounded-full transition-all duration-300" />
-              )}
-            </button>
-          ))}
-        </div>
-      </div>
+    <div className="w-full min-h-screen bg-transparent">
+      {/* TopBar */}
+      <TopBar />
+      
+      <div className="mx-4 mt-4 overflow-hidden bg-transparent">
+        {/* Header with Sticky Navigation */}
+        {/* <div className="sticky top-0 z-40 backdrop-blur-xl bg-white/5 modern-separator">
+          <div className="flex">
+            {['discover', 'videos'].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`flex-1 py-5 text-center font-semibold transition-all duration-300 relative rounded-t-3xl ${
+                  activeTab === tab
+                    ? 'text-twitter-white bg-twitter-disabled/10'
+                    : 'text-twitter-subtle hover:text-twitter-white hover:bg-twitter-disabled/5'
+                }`}
+              >
+                <span className="capitalize text-lg font-semibold">{tab}</span>
+                {activeTab === tab && (
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-twitter-blue to-purple-500 rounded-full transition-all duration-300" />
+                )}
+              </button>
+            ))}
+          </div>
+        </div> */}
 
       {/* Tweet Composition */}
-      <div className="bg-gradient-to-r from-twitter-background to-twitter-surface/10 border-b border-twitter-border/20">
-        <div className="p-4 sm:p-6">
-          <div className="flex space-x-3 sm:space-x-4">
-            <img
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face"
-              alt="Your avatar"
-              className="w-12 h-12 rounded-full ring-2 ring-twitter-blue/30 flex-shrink-0"
+      <div className="m-4 p-6 bg-transparent">
+        <div className="flex space-x-2 bg-[#181A1E] p-2 rounded-2xl">
+          <img
+            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face"
+            alt="Your avatar"
+            className="w-14 h-14 rounded-2xl shadow-lg flex-shrink-0 m-4"
+          />
+          <div className="flex-1 min-w-0 p-4">
+            <textarea
+              value={tweetText}
+              onChange={(e) => setTweetText(e.target.value)}
+              placeholder="What's happening?"
+              className="w-full bg-transparent text-lg text-twitter-white placeholder-twitter-muted resize-none focus:outline-none min-h-[80px] leading-relaxed text-body"
+              maxLength={280}
             />
-            <div className="flex-1 min-w-0">
-              <textarea
-                value={tweetText}
-                onChange={(e) => setTweetText(e.target.value)}
-                placeholder="What's happening?"
-                className="w-full bg-transparent text-xl text-twitter-white placeholder-twitter-lightGray resize-none focus:outline-none min-h-[80px] leading-relaxed"
-                maxLength={280}
-              />
-              
-              {/* Tweet Actions */}
-              <div className="flex items-center justify-between mt-4 gap-4">
-                <div className="flex space-x-1 sm:space-x-2 overflow-x-auto">
-                  {[
-                    { 
-                      icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>, 
-                      label: 'Media',
-                      color: 'text-twitter-blue hover:bg-twitter-blue/10'
-                    },
+            
+            {/* Tweet Actions */}
+            <div className="flex items-center justify-between mt-6 gap-4">
+              <div className="flex space-x-3 overflow-x-auto">
+                {[
+                  { 
+                    icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>, 
+                    label: 'Media',
+                    color: 'text-twitter-blue hover:bg-twitter-blue/10'
+                  },
                     { 
                       icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>, 
                       label: 'Poll',
@@ -348,7 +357,7 @@ const Discover = () => {
                       </div>
                       <span className={`text-sm font-medium hidden sm:inline ${
                         tweetText.length > 260 ? 'text-red-500' : 
-                        tweetText.length > 240 ? 'text-yellow-500' : 'text-twitter-lightGray'
+                        tweetText.length > 240 ? 'text-yellow-500' : 'text-twitter-subtle'
                       }`}>
                         {280 - tweetText.length}
                       </span>
@@ -356,26 +365,25 @@ const Discover = () => {
                   )}
                   
                   <button 
-                    className={`px-4 sm:px-6 py-2 rounded-full font-bold transition-all duration-200 text-sm sm:text-base ${
+                    className={`px-6 py-3 rounded-2xl font-bold transition-all duration-200 text-base ${
                       tweetText.trim() 
                         ? 'bg-gradient-to-r from-twitter-blue to-purple-500 hover:from-twitter-darkBlue hover:to-purple-600 text-white shadow-lg hover:shadow-xl transform hover:scale-105' 
                         : 'bg-twitter-blue/50 text-white/70 cursor-not-allowed'
                     }`}
                     disabled={!tweetText.trim()}
                   >
-                    Tweet
+                    Post
                   </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
       {/* Content Area */}
-      <div className="pb-20">
+      <div className="pb-20 bg-transparent">
         {activeTab === 'discover' && (
-          <div className="divide-y divide-twitter-border/20">
+          <div className="bg-transparent">
             {mockPosts.map((post, index) => (
               <div 
                 key={post.id} 
@@ -399,7 +407,7 @@ const Discover = () => {
               <h3 className="text-3xl font-bold text-twitter-white mb-4">
                 Video content coming soon! 🎬
               </h3>
-              <p className="text-twitter-lightGray text-lg leading-relaxed">
+              <p className="text-twitter-muted text-lg leading-relaxed">
                 We're working on bringing you the best video content from the crypto and Web3 community. 
                 Stay tuned for exciting updates!
               </p>
@@ -411,6 +419,7 @@ const Discover = () => {
             </div>
           </div>
         )}
+      </div>
       </div>
     </div>
   )

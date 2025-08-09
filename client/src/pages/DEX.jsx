@@ -60,7 +60,7 @@ const DEX = () => {
         <input
           type="text"
           placeholder="0.00"
-          className="bg-transparent text-twitter-white text-2xl text-right focus:outline-none w-40 font-bold placeholder-twitter-lightGray"
+          className="bg-transparent text-twitter-white text-2xl text-right focus:outline-none w-40 font-bold placeholder-twitter-muted"
           value={label === 'From' ? fromAmount : toAmount}
           onChange={(e) => label === 'From' ? setFromAmount(e.target.value) : setToAmount(e.target.value)}
         />
@@ -234,11 +234,11 @@ const DEX = () => {
               
               <div className="space-y-6">
                 <div className="glass rounded-2xl p-6">
-                  <label className="block text-twitter-lightGray text-sm mb-3 font-medium">Recipient Address</label>
+                  <label className="block text-twitter-muted text-sm mb-3 font-medium">Recipient Address</label>
                   <input
                     type="text"
                     placeholder="0x... or username.eth"
-                    className="w-full bg-transparent text-twitter-white text-lg focus:outline-none placeholder-twitter-lightGray"
+                    className="w-full bg-transparent text-twitter-white text-lg focus:outline-none placeholder-twitter-muted"
                   />
                 </div>
                 
@@ -249,10 +249,10 @@ const DEX = () => {
                 />
                 
                 <div className="glass rounded-2xl p-6">
-                  <label className="block text-twitter-lightGray text-sm mb-3 font-medium">Message (Optional)</label>
+                  <label className="block text-twitter-muted text-sm mb-3 font-medium">Message (Optional)</label>
                   <textarea
                     placeholder="Add a note..."
-                    className="w-full bg-transparent text-twitter-white text-lg focus:outline-none placeholder-twitter-lightGray resize-none h-24"
+                    className="w-full bg-transparent text-twitter-white text-lg focus:outline-none placeholder-twitter-muted resize-none h-24"
                   />
                 </div>
                 
@@ -280,7 +280,7 @@ const DEX = () => {
                   <input
                     type="text"
                     placeholder="Username or address"
-                    className="w-full bg-transparent text-twitter-white text-lg focus:outline-none placeholder-twitter-lightGray"
+                    className="w-full bg-transparent text-twitter-white text-lg focus:outline-none placeholder-twitter-muted"
                   />
                 </div>
                 
@@ -294,7 +294,7 @@ const DEX = () => {
                   <label className="block text-twitter-lightGray text-sm mb-3 font-medium">Reason</label>
                   <textarea
                     placeholder="What's this for?"
-                    className="w-full bg-transparent text-twitter-white text-lg focus:outline-none placeholder-twitter-lightGray resize-none h-24"
+                    className="w-full bg-transparent text-twitter-white text-lg focus:outline-none placeholder-twitter-muted resize-none h-24"
                   />
                 </div>
                 

@@ -180,7 +180,7 @@ const Wallet = () => {
             <h3 className="text-xl font-bold text-white mb-2">Fund Your Wallet</h3>
             <p className="text-blue-100">Add money to start trading and sending crypto</p>
           </div>
-          <button className="bg-white text-twitter-blue font-bold py-3 px-6 rounded-xl hover:bg-gray-100 transition-colors">
+          <button className="bg-white text-twitter-blue font-bold py-3 px-6 rounded-xl hover:bg-twitter-extraLightGray transition-colors">
             Add Funds
           </button>
         </div>

@@ -14,8 +14,13 @@ export const ProtectedRoute = () => {
     }
     
     return (
-        <div className="flex h-screen w-full bg-twitter-background text-twitter-white">
-            <div className="fixed inset-0 bg-gradient-to-br from-twitter-background via-twitter-darker to-twitter-surface opacity-30 animate-pulse-gentle pointer-events-none"></div>
+        <div className="flex h-screen w-full bg-gradient-to-br from-twitter-background via-twitter-darker to-twitter-surface text-twitter-white overflow-hidden">
+            {/* Animated background overlay */}
+            <div className="fixed inset-0 bg-gradient-to-br from-twitter-blue/3 via-transparent to-purple-500/3 animate-pulse-gentle pointer-events-none"></div>
+            
+            {/* Floating orbs for visual appeal */}
+            <div className="fixed top-20 left-20 w-64 h-64 bg-twitter-blue/5 rounded-full blur-3xl animate-pulse-gentle pointer-events-none"></div>
+            <div className="fixed bottom-20 right-20 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl animate-pulse-gentle pointer-events-none" style={{animationDelay: '1s'}}></div>
             
             <div className="relative z-10 flex w-full">
                 {/* Sidebar - Hidden on mobile, shown on larger screens */}
