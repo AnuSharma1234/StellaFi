@@ -34,17 +34,16 @@ const RightSidebar = () => {
   ]
 
   return (
-    // MODIFIED: Adjusted width and padding for a more balanced layout
-    <aside className="w-80 lg:w-96 p-4 space-y-6 overflow-y-auto h-screen ml-4 hidden md:block">
+    <aside className="w-80 p-4 space-y-6 overflow-y-auto h-screen hidden xl:block">
       {/* Search */}
       <div className="sticky top-4 z-10">
-        <div className="relative">
+        <div className="relative group">
           <input
             type="text"
             placeholder="Search StellaFi"
-            className="w-full bg-twitter-surface rounded-full py-3 px-4 pl-12 text-twitter-white placeholder-twitter-lightGray focus:outline-none focus:ring-2 focus:ring-twitter-blue transition-all duration-300"
+            className="w-full bg-twitter-surface/60 backdrop-blur-sm rounded-full py-3 px-4 pl-12 text-twitter-white placeholder-twitter-lightGray focus:outline-none focus:ring-2 focus:ring-twitter-blue/30 transition-all duration-300 hover:bg-twitter-surface/80"
           />
-          <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-twitter-lightGray">
+          <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-twitter-lightGray group-focus-within:text-twitter-blue transition-colors">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
@@ -53,7 +52,7 @@ const RightSidebar = () => {
       </div>
 
       {/* What's happening */}
-      <div className="bg-twitter-surface rounded-2xl overflow-hidden">
+      <div className="bg-twitter-surface/60 backdrop-blur-sm rounded-2xl overflow-hidden">
         <div className="p-4">
           <h2 className="text-xl font-bold text-twitter-white">What's happening</h2>
         </div>
@@ -62,10 +61,9 @@ const RightSidebar = () => {
           {trendingTopics.map((topic, index) => (
             <div
               key={index}
-              className="p-4 hover:bg-twitter-surface/60 transition-colors duration-200 cursor-pointer group"
+              className="p-4 hover:bg-twitter-surface/80 transition-all duration-200 cursor-pointer group"
             >
               <div className="flex justify-between items-start">
-                {/* MODIFIED: Added text-left to ensure proper alignment */}
                 <div className="flex-1 text-left">
                   <div className="text-twitter-lightGray text-sm mb-1">
                     Trending in {topic.category}
@@ -77,7 +75,7 @@ const RightSidebar = () => {
                     {topic.tweets} Tweets
                   </div>
                 </div>
-                <button className="opacity-50 group-hover:opacity-100 p-2 -mr-2 -mt-1 rounded-full text-twitter-lightGray hover:bg-twitter-blue/10 hover:text-twitter-blue transition-all duration-200">
+                <button className="opacity-60 group-hover:opacity-100 p-2 -mr-2 -mt-1 rounded-full text-twitter-lightGray hover:bg-twitter-blue/10 hover:text-twitter-blue transition-all duration-200">
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
                   </svg>
@@ -87,7 +85,7 @@ const RightSidebar = () => {
           ))}
         </div>
         
-        <div className="p-4 hover:bg-twitter-surface/60 transition-colors duration-200">
+        <div className="p-4 hover:bg-twitter-surface/80 transition-colors duration-200">
           <button className="text-twitter-blue hover:underline text-sm font-medium">
             Show more
           </button>
@@ -95,7 +93,7 @@ const RightSidebar = () => {
       </div>
 
       {/* Who to follow */}
-      <div className="bg-twitter-surface rounded-2xl overflow-hidden">
+      <div className="bg-twitter-surface/60 backdrop-blur-sm rounded-2xl overflow-hidden">
         <div className="p-4">
           <h2 className="text-xl font-bold text-twitter-white">Who to follow</h2>
         </div>
@@ -104,7 +102,7 @@ const RightSidebar = () => {
           {whoToFollow.map((user, index) => (
             <div
               key={index}
-              className="p-4 hover:bg-twitter-surface/60 transition-colors duration-200 cursor-pointer group"
+              className="p-4 hover:bg-twitter-surface/80 transition-all duration-200 cursor-pointer group"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
@@ -112,7 +110,7 @@ const RightSidebar = () => {
                     <img
                       src={user.avatar}
                       alt={user.name}
-                      className="w-12 h-12 rounded-full"
+                      className="w-12 h-12 rounded-full ring-2 ring-transparent group-hover:ring-twitter-blue/30 transition-all duration-300"
                     />
                     {user.verified && (
                       <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-twitter-blue rounded-full flex items-center justify-center border-2 border-twitter-surface">
@@ -131,7 +129,7 @@ const RightSidebar = () => {
                     </div>
                   </div>
                 </div>
-                <button className="bg-twitter-white text-twitter-background font-bold py-1.5 px-4 rounded-full hover:bg-twitter-lightGray transition-colors">
+                <button className="bg-twitter-white text-twitter-background font-bold py-2 px-4 rounded-full hover:bg-twitter-lightGray transition-all duration-200 hover:scale-105">
                   Follow
                 </button>
               </div>
@@ -139,7 +137,7 @@ const RightSidebar = () => {
           ))}
         </div>
         
-        <div className="p-4 hover:bg-twitter-surface/60 transition-colors duration-200">
+        <div className="p-4 hover:bg-twitter-surface/80 transition-colors duration-200">
           <button className="text-twitter-blue hover:underline text-sm font-medium">
             Show more
           </button>

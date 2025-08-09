@@ -19,15 +19,30 @@ export default {
           background: '#15202B',
           darker: '#192734',
           surface: '#1E2732',
-          border: '#38444D', // A slightly lighter border for better visibility
+          border: '#38444D',
           success: '#00BA7C',
-          // --- ADDED THESE TWO COLORS ---
-          danger: '#F91880', // For likes
-          purple: '#7B61FF', // For NFTs
+          danger: '#F91880',
+          purple: '#7B61FF',
         }
       },
       fontFamily: {
         'twitter': ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif']
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.6s ease-out',
+        'slide-in': 'slideIn 0.4s ease-out',
+        'pulse-gentle': 'pulse 3s infinite',
+        'bounce-gentle': 'bounce 2s infinite'
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' }
+        },
+        slideIn: {
+          '0%': { opacity: '0', transform: 'translateX(-20px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' }
+        }
       }
     },
   },

@@ -14,11 +14,14 @@ export const ProtectedRoute = () => {
     }
     
     return (
-        <div className="flex h-screen w-full overflow-y-hidden bg-twitter-background text-twitter-white overflow-hidden">
-            <div className="fixed inset-0 bg-gradient-to-br from-twitter-background via-twitter-darker to-twitter-surface opacity-50 animate-pulse pointer-events-none"></div>
+        <div className="flex h-screen w-full bg-twitter-background text-twitter-white">
+            <div className="fixed inset-0 bg-gradient-to-br from-twitter-background via-twitter-darker to-twitter-surface opacity-30 animate-pulse-gentle pointer-events-none"></div>
             
             <div className="relative z-10 flex w-full">
-                <LeftSidebar />
+                {/* Sidebar - Hidden on mobile, shown on larger screens */}
+                <div className="hidden lg:block">
+                    <LeftSidebar />
+                </div>
 
                 <div className="flex-1 flex flex-col min-w-0">
                     <div className="flex flex-1 overflow-hidden">
@@ -28,7 +31,12 @@ export const ProtectedRoute = () => {
                             </div>
                         </main>
 
-                        {showRightSidebar && <RightSidebar />}
+                        {/* Right Sidebar - Only show on larger screens and specific routes */}
+                        {showRightSidebar && (
+                            <div className="hidden xl:block">
+                                <RightSidebar />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
