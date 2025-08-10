@@ -3,7 +3,6 @@ import { useWallet } from '../provider/key.provider'
 import useAccountBalance from '../hooks/useAccountBalance'
 import { Wallet, RefreshCw, AlertCircle, ExternalLink } from 'lucide-react'
 import { NetworkDisplay } from '../components/NetworkDisplay'
-import '../utils/testnetVerify' // Import testnet verification utilities
 
 const WalletPage = () => {
   const [activeTab, setActiveTab] = useState('overview')
@@ -29,36 +28,12 @@ const WalletPage = () => {
     getBalance 
   } = useAccountBalance()
 
-  // Debug logging for wallet state
-  console.log('🔍 WALLET PAGE DEBUG:');
-  console.log('  publicKey:', publicKey);
-  console.log('  isWalletConnected:', isWalletConnected);
-  console.log('  walletLoading:', walletLoading);
-  console.log('  walletError:', walletError);
-  console.log('  balances:', balances);
-  console.log('  balanceLoading:', balanceLoading);
-  console.log('  balanceError:', balanceError);
-
-  // Auto-refresh balances when wallet connects
-  useEffect(() => {
-    if (isWalletConnected && publicKey && !balanceLoading) {
-      console.log('🔍 Wallet connected, refreshing balances...');
-      // Small delay to ensure wallet connection is stable
-      const timer = setTimeout(() => {
-        refreshBalances();
-      }, 500);
-      return () => clearTimeout(timer);
-    }
-  }, [isWalletConnected, publicKey]);
-
   // Calculate total portfolio value (simplified - just XLM for now)
   const calculateTotalValue = () => {
-    console.log('🔍 Calculating total value, balances:', balances);
     if (!balances.length) return { total: '$0.00', change: '+$0.00 (0%)', positive: true }
     
     // For demo purposes, assume 1 XLM = $0.12 (you can integrate with price API later)
     const xlmBalance = getBalance('XLM')
-    console.log('🔍 XLM Balance:', xlmBalance);
     const xlmPrice = 0.12
     const totalValue = parseFloat(xlmBalance) * xlmPrice
     
@@ -72,14 +47,9 @@ const WalletPage = () => {
   const walletBalance = calculateTotalValue()
 
   // Convert balances to asset format for display
-  console.log('🔍 Raw balances from hook:', balances);
-  console.log('🔍 Balance loading state:', balanceLoading);
-  console.log('🔍 Balance error:', balanceError);
-  
-  const assets = balances.map((balance, index) => {
-    console.log('🔍 Processing balance:', balance);
+  const assets = balances.map(balance => {
     const assetCode = balance.asset_code || 'XLM'
-    const amount = parseFloat(balance.balance || 0).toFixed(6) // Show more decimals for crypto
+    const amount = parseFloat(balance.balance).toFixed(2)
     
     // Demo prices and changes (integrate with real price API later)
     const demoPrices = {
@@ -93,7 +63,6 @@ const WalletPage = () => {
     const value = (parseFloat(amount) * priceInfo.price).toFixed(2)
     
     return {
-      id: `${assetCode}-${index}`, // Add unique key
       name: balance.asset_code ? `${balance.asset_issuer?.slice(0, 8)}...${balance.asset_issuer?.slice(-4)}` : 'Stellar Lumens',
       symbol: assetCode,
       amount: amount,
@@ -102,7 +71,7 @@ const WalletPage = () => {
       positive: priceInfo.positive,
       balance: balance
     }
-  });
+  })
 
   // Demo activity (you can extend this to fetch from Stellar transaction history)
   const recentActivity = [
@@ -439,24 +408,9 @@ const WalletPage = () => {
                     </div>
                   ) : assets.length > 0 ? (
                     // Assets available
-                    assets.map((asset) => (
-                      <AssetCard key={asset.id} asset={asset} />
+                    assets.map((asset, index) => (
+                      <AssetCard key={index} asset={asset} />
                     ))
-                  ) : balanceError ? (
-                    // Error state
-                    <div className="text-center py-8">
-                      <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <AlertCircle className="w-8 h-8 text-red-400" />
-                      </div>
-                      <p className="text-red-400 mb-2">Error loading assets</p>
-                      <p className="text-twitter-darkGray text-sm mb-4">{balanceError}</p>
-                      <button 
-                        onClick={refreshBalances}
-                        className="bg-twitter-blue text-white px-4 py-2 rounded-lg hover:bg-twitter-darkBlue transition-colors"
-                      >
-                        Try Again
-                      </button>
-                    </div>
                   ) : (
                     // No assets found
                     <div className="text-center py-8">

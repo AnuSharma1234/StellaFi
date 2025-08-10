@@ -1,4 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useWallet } from '../provider/key.provider'
+import useAccountBalance from '../hooks/useAccountBalance'
+import { Wallet, RefreshCw, AlertCircle } from 'lucide-react'
+import { NetworkDisplay } from '../components/NetworkDisplay'
+import '../utils/freighterTest' // Import debug utilities
+import '../utils/stellarTest' // Import Stellar SDK test utilities
+import '../utils/testnetVerify' // Import testnet verification utilities
 
 const DEX = () => {
   const [activeTab, setActiveTab] = useState('trade')
@@ -6,6 +13,30 @@ const DEX = () => {
   const [toToken, setToToken] = useState('USDC')
   const [fromAmount, setFromAmount] = useState('')
   const [toAmount, setToAmount] = useState('')
+
+  // Wallet integration
+  const { 
+    publicKey, 
+    isWalletConnected, 
+    network, 
+    networkDetails, 
+    connectWallet, 
+    disconnectWallet,
+    isLoading: walletLoading,
+    error: walletError
+  } = useWallet()
+
+  // Account balance integration
+  const { 
+    balances, 
+    loading: balanceLoading, 
+    error: balanceError, 
+    refreshBalances, 
+    getBalance 
+  } = useAccountBalance()
+
+  // Available tokens based on account balances
+  const availableTokens = balances.length > 0 ? balances.map(balance => balance.asset_code) : ['XLM', 'USDC', 'BTC', 'SOL', 'ADA']
 
   const trendingTokens = [
     { name: 'XLM', symbol: 'XLM', price: '$2,345.67', change: '+5.2%', volume: '$1.2B', positive: true, icon: (
@@ -35,6 +66,85 @@ const DEX = () => {
     ) },
   ]
 
+  // Wallet connection component
+  const WalletConnection = () => {
+    if (!isWalletConnected) {
+      return (
+        <div className="glass rounded-2xl p-6 mb-8">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <Wallet className="w-8 h-8 text-twitter-blue" />
+              <div>
+                <h3 className="text-twitter-white font-semibold text-lg">Connect Wallet</h3>
+                <p className="text-twitter-lightGray text-sm">Connect your Freighter wallet to start trading</p>
+              </div>
+            </div>
+            <button
+              onClick={connectWallet}
+              disabled={walletLoading}
+              className="bg-gradient-to-r from-twitter-blue to-purple-500 text-white font-semibold py-3 px-6 rounded-xl hover:shadow-lg transition-all duration-300 disabled:opacity-50"
+            >
+              {walletLoading ? 'Connecting...' : 'Connect Wallet'}
+            </button>
+          </div>
+          {walletError && (
+            <div className="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg flex items-center space-x-2">
+              <AlertCircle className="w-5 h-5 text-red-400" />
+              <span className="text-red-400 text-sm">{walletError}</span>
+            </div>
+          )}
+        </div>
+      )
+    }
+
+    return (
+      <div className="glass rounded-2xl p-6 mb-8">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-500 rounded-xl flex items-center justify-center">
+              <Wallet className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h3 className="text-twitter-white font-semibold text-lg">Wallet Connected</h3>
+              <p className="text-twitter-lightGray text-sm font-mono">
+                {publicKey && typeof publicKey === 'string' ? `${publicKey.slice(0, 8)}...${publicKey.slice(-8)}` : 'Address not available'}
+              </p>
+              <p className="text-twitter-blue text-xs">
+                Network: <NetworkDisplay network={network} networkDetails={networkDetails} />
+                {networkDetails?.network?.includes('test') || networkDetails?.networkPassphrase?.includes('Test') || 
+                 network?.includes?.('test') || network?.includes?.('Test') ? 
+                  <span className="ml-2 px-2 py-1 bg-yellow-500/20 text-yellow-300 text-xs rounded">Development Mode</span> : null}
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center space-x-2">
+            <button
+              onClick={refreshBalances}
+              disabled={balanceLoading}
+              className="p-2 hover:bg-twitter-surface rounded-lg transition-colors"
+              title="Refresh balances"
+            >
+              <RefreshCw className={`w-5 h-5 text-twitter-lightGray ${balanceLoading ? 'animate-spin' : ''}`} />
+            </button>
+            <button
+              onClick={disconnectWallet}
+              className="text-twitter-lightGray hover:text-red-400 text-sm px-3 py-1 hover:bg-red-500/10 rounded-lg transition-colors"
+            >
+              Disconnect
+            </button>
+          </div>
+        </div>
+        
+        {balanceError && (
+          <div className="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg flex items-center space-x-2">
+            <AlertCircle className="w-5 h-5 text-red-400" />
+            <span className="text-red-400 text-sm">{balanceError}</span>
+          </div>
+        )}
+      </div>
+    )
+  }
+
   const TokenSelector = ({ value, onChange, label }) => (
     <div className="glass rounded-2xl p-6 hover:bg-twitter-surface/10 transition-all duration-300 group">
       <label className="block text-twitter-lightGray text-sm mb-3 font-medium">{label}</label>
@@ -50,11 +160,9 @@ const DEX = () => {
             onChange={(e) => onChange(e.target.value)}
             className="bg-transparent text-twitter-white text-xl font-semibold focus:outline-none cursor-pointer hover:text-twitter-blue transition-colors"
           >
-            <option value="XLM">XLM</option>
-            <option value="BTC">BTC</option>
-            <option value="USDC">USDC</option>
-            <option value="SOL">SOL</option>
-            <option value="ADA">ADA</option>
+            {availableTokens.map(token => (
+              <option key={token} value={token}>{token}</option>
+            ))}
           </select>
         </div>
         <input
@@ -66,7 +174,15 @@ const DEX = () => {
         />
       </div>
       <div className="mt-3 text-twitter-lightGray text-sm">
-        Balance: {Math.random().toFixed(4)} {value}
+        Balance: {isWalletConnected ? (
+          balanceLoading ? (
+            <span className="animate-pulse">Loading...</span>
+          ) : (
+            `${(getBalance(value) || 0).toFixed(4)} ${value}`
+          )
+        ) : (
+          'Connect wallet to view balance'
+        )}
       </div>
     </div>
   )
@@ -102,6 +218,9 @@ const DEX = () => {
         <h1 className="text-4xl font-bold text-twitter-white mb-2">Decentralized Exchange</h1>
         <p className="text-twitter-lightGray text-lg">Trade tokens instantly with the best rates</p>
       </div>
+
+      {/* Wallet Connection Status */}
+      <WalletConnection />
 
       {/* Header Tabs */}
       <div className="flex space-x-2 glass rounded-2xl p-2 mb-8 max-w-md">
@@ -306,26 +425,89 @@ const DEX = () => {
           )}
         </div>
 
-        {/* Trending Tokens Sidebar */}
-        <div className="glass rounded-3xl p-6">
-          <div className="flex items-center space-x-3 mb-6">
-            <div className="w-10 h-10 bg-gradient-to-br from-twitter-blue to-purple-500 rounded-xl flex items-center justify-center">
-              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
+        {/* Right Sidebar */}
+        <div className="space-y-6">
+          {/* Wallet Balances */}
+          {isWalletConnected && (
+            <div className="glass rounded-3xl p-6">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-blue-500 rounded-xl flex items-center justify-center">
+                    <Wallet className="w-5 h-5 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-twitter-white">Your Balances</h3>
+                </div>
+                <button
+                  onClick={refreshBalances}
+                  disabled={balanceLoading}
+                  className="p-2 hover:bg-twitter-surface rounded-lg transition-colors"
+                  title="Refresh balances"
+                >
+                  <RefreshCw className={`w-4 h-4 text-twitter-lightGray ${balanceLoading ? 'animate-spin' : ''}`} />
+                </button>
+              </div>
+              
+              <div className="space-y-3">
+                {balanceLoading ? (
+                  <div className="animate-pulse space-y-3">
+                    {[1, 2, 3].map(i => (
+                      <div key={i} className="flex justify-between">
+                        <div className="h-4 bg-twitter-surface rounded w-16"></div>
+                        <div className="h-4 bg-twitter-surface rounded w-24"></div>
+                      </div>
+                    ))}
+                  </div>
+                ) : balances.length > 0 ? (
+                  balances.map((balance, index) => (
+                    <div key={index} className="flex items-center justify-between p-3 hover:bg-twitter-surface/30 rounded-xl transition-all duration-300">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-gradient-to-br from-twitter-blue to-purple-500 rounded-lg flex items-center justify-center">
+                          <span className="text-white text-xs font-bold">
+                            {balance.asset_code.slice(0, 2)}
+                          </span>
+                        </div>
+                        <span className="text-twitter-white font-semibold">{balance.asset_code}</span>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-twitter-white font-bold">
+                          {isNaN(parseFloat(balance.balance)) ? '0.0000' : parseFloat(balance.balance).toFixed(4)}
+                        </div>
+                        <div className="text-twitter-lightGray text-xs">
+                          {balance.asset_type === 'native' ? 'Native' : 'Token'}
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center py-6">
+                    <p className="text-twitter-lightGray">No assets found</p>
+                  </div>
+                )}
+              </div>
             </div>
-            <h3 className="text-2xl font-bold text-twitter-white">Trending</h3>
+          )}
+
+          {/* Trending Tokens Sidebar */}
+          <div className="glass rounded-3xl p-6">
+            <div className="flex items-center space-x-3 mb-6">
+              <div className="w-10 h-10 bg-gradient-to-br from-twitter-blue to-purple-500 rounded-xl flex items-center justify-center">
+                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-twitter-white">Trending</h3>
+            </div>
+            
+            <div className="space-y-3">
+              {trendingTokens.map((token, index) => (
+                <TrendingToken key={index} token={token} />
+              ))}
+            </div>
+            
+            <button className="w-full mt-6 glass hover:bg-twitter-surface text-twitter-blue font-semibold py-4 rounded-2xl transition-all duration-300 hover:scale-105">
+              View All Tokens
+            </button>
           </div>
-          
-          <div className="space-y-3">
-            {trendingTokens.map((token, index) => (
-              <TrendingToken key={index} token={token} />
-            ))}
-          </div>
-          
-          <button className="w-full mt-6 glass hover:bg-twitter-surface text-twitter-blue font-semibold py-4 rounded-2xl transition-all duration-300 hover:scale-105">
-            View All Tokens
-          </button>
         </div>
       </div>
     </div>

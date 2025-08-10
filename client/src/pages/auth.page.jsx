@@ -1,10 +1,11 @@
 import { Wallet, ExternalLink } from 'lucide-react';
 import {toast , ToastContainer} from 'react-toastify'
-import {isConnected, requestAccess} from '@stellar/freighter-api'
 import { useNavigate } from 'react-router-dom';
+import { useWallet } from '../provider/key.provider';
 
 export default function Auth() {
     const navigate = useNavigate()
+    const { connectWallet, isLoading, error } = useWallet()
 
     const handleError = (error) => {
         toast.error(error, {
@@ -18,28 +19,19 @@ export default function Auth() {
         })
     }
 
-    const isFreighterInstalled = async () => await isConnected();
-
-    const connectWallet = async () => {
-        if(!(await isFreighterInstalled())){
-            handleError('Please install Freighter wallet !!');
-            return;
-        }
-
+    const handleConnectWallet = async () => {
         try {
-            const requestObj = await requestAccess()
-            const pubKey = requestObj.address
-
-            if(pubKey) {
-                localStorage.setItem('pubKey', pubKey)
-                console.log(`Connected to ${pubKey}`)
-                handleSuccess(`Connected successfully`)
+            const result = await connectWallet()
+            
+            if (result.success) {
+                handleSuccess('Connected successfully')
                 navigate('/discover')
-          }
-
-        } catch(error) {
+            } else {
+                handleError(result.error || 'Failed to connect wallet')
+            }
+        } catch (err) {
             handleError('Cannot connect to the wallet')
-            console.log(`Freighter connection failed : ERROR : ${error.message}`)
+            console.log(`Wallet connection failed: ERROR: ${err.message}`)
         }
     }
 
@@ -70,10 +62,23 @@ export default function Auth() {
         </p>
 
         {/* Connect Wallet Button */}
-        <button onClick={connectWallet} className="w-full bg-gradient-to-r from-twitter-blue to-purple-500 text-white font-semibold font-heading text-lg py-4 px-6 rounded-2xl hover:shadow-lg hover:shadow-twitter-blue/25 transition-all duration-300 flex items-center justify-center space-x-3 mb-8 transform hover:scale-105">
+        <button 
+          onClick={handleConnectWallet} 
+          disabled={isLoading}
+          className="w-full bg-gradient-to-r from-twitter-blue to-purple-500 text-white font-semibold font-heading text-lg py-4 px-6 rounded-2xl hover:shadow-lg hover:shadow-twitter-blue/25 transition-all duration-300 flex items-center justify-center space-x-3 mb-8 transform hover:scale-105 disabled:opacity-50 disabled:transform-none"
+        >
           <Wallet className="w-5 h-5" />
-          <span className='cursor-pointer'>Connect Wallet</span>
+          <span className='cursor-pointer'>
+            {isLoading ? 'Connecting...' : 'Connect Wallet'}
+          </span>
         </button>
+
+        {/* Error Display */}
+        {error && (
+          <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm text-center">
+            {error}
+          </div>
+        )}
 
          <div className="text-center mb-8">
             <p className="text-twitter-lightGray text-base font-body mb-3">

@@ -1,12 +1,15 @@
 import "./App.css";
 import { WalletProvider } from "./provider/key.provider";
+import ErrorBoundary from "./components/ErrorBoundary";
 import Routes from "./routes";
 
 function App() {
   return (
-    <WalletProvider>
+    <ErrorBoundary>
+      <WalletProvider>
         <Routes/>
-    </WalletProvider>
+      </WalletProvider>
+    </ErrorBoundary>
   );
 }
 

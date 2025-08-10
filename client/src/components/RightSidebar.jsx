@@ -2,8 +2,8 @@ import React from 'react'
 
 const RightSidebar = () => {
   const trendingTopics = [
-    { hashtag: '#Bitcoin', category: 'Cryptocurrency', tweets: '1.2M' },
-    { hashtag: '#Ethereum', category: 'Cryptocurrency', tweets: '850K' },
+    { hashtag: '#XLM', category: 'Cryptocurrency', tweets: '1.2M' },
+    { hashtag: '#Stellar', category: 'Cryptocurrency', tweets: '850K' },
     { hashtag: '#Web3', category: 'Technology', tweets: '456K' },
     { hashtag: '#DeFi', category: 'Finance', tweets: '234K' },
     { hashtag: '#NFT', category: 'Digital Art', tweets: '189K' },
@@ -14,16 +14,16 @@ const RightSidebar = () => {
 
   const whoToFollow = [
     {
+      name: 'Stellar',
+      handle: '@stellar',
+      verified: true,
+      avatar: '/stellar.png'
+    },
+    {
       name: 'Vitalik Buterin',
       handle: '@VitalikButerin',
       verified: true,
       avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=40&h=40&fit=crop&crop=face'
-    },
-    {
-      name: 'Coinbase',
-      handle: '@coinbase',
-      verified: true,
-      avatar: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=40&h=40&fit=crop&crop=face'
     },
     {
       name: 'OpenSea',

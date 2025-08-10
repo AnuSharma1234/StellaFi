@@ -9,6 +9,7 @@ import Discover from "../pages/Discover";
 import DEX from "../pages/DEX";
 import Notifications from "../pages/Notifications";
 import Wallet from "../pages/Wallet";
+import Launchpad from "../pages/Launchpad";
 
 const Routes = () => {
     const { publicKey } = useWallet()
@@ -49,6 +50,10 @@ const Routes = () => {
                 {
                     path: '/notifications',
                     element: <Notifications />
+                },
+                {
+                    path: '/launchpad',
+                    element: <Launchpad />
                 },
             ] : []
         }

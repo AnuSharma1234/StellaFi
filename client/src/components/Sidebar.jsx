@@ -13,6 +13,7 @@ const LeftSidebar = () => {
     if (path.startsWith('/dex')) return 'dex'
     if (path.startsWith('/wallet')) return 'wallet'
     if (path.startsWith('/notifications')) return 'notifications'
+    if (path.startsWith('/launchpad')) return 'launchpad'
     return 'discover' // Default to discover
   }
 
@@ -110,12 +111,14 @@ const LeftSidebar = () => {
       
       {/* Tweet Button */}
       <div className="relative z-10 p-4">
-        <button className="w-full bg-gradient-to-r from-twitter-blue to-purple-500 hover:shadow-2xl hover:shadow-twitter-blue/30 text-white font-bold py-5 px-6 rounded-3xl transition-all duration-300 transform hover:scale-105 active:scale-95 group modern-card">
+        <button
+        onClick={() => navigate(`/launchpad`)}
+        className="w-full bg-gradient-to-r from-twitter-blue to-purple-500 hover:shadow-2xl hover:shadow-twitter-blue/30 text-white font-bold py-5 px-6 rounded-3xl transition-all duration-300 transform hover:scale-105 active:scale-95 group modern-card">
           <div className="flex items-center justify-center space-x-3">
             {/* <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
             </svg> */}
-            <span className="text-lg font-semibold font-heading">🚀&nbsp;&nbsp;Launch</span>
+            <span className="text-lg font-semibold font-heading">🚀&nbsp;&nbsp;Launch Token</span>
           </div>
         </button>
       </div>

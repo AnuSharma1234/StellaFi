@@ -1,0 +1,229 @@
+[
+  {
+    "id": 1754817627334,
+    "user": {
+      "name": "You",
+      "handle": "@you",
+      "avatar": "/stellafi.png",
+      "verified": false
+    },
+    "time": "now",
+    "content": "Guys, just launched OIIA on Stellar! :)",
+    "likes": 1,
+    "replies": 0,
+    "retweets": 0,
+    "trending": false
+  },
+  {
+    "id": 1754817499116,
+    "user": {
+      "name": "You",
+      "handle": "@you",
+      "avatar": "/stellafi.png",
+      "verified": false
+    },
+    "time": "now",
+    "content": "Hey guys! Just launched my first token OIIA on Stellar!",
+    "likes": 0,
+    "replies": 0,
+    "retweets": 0,
+    "trending": false
+  },
+  {
+    "id": 1754806289066,
+    "user": {
+      "name": "You",
+      "handle": "@you",
+      "avatar": "/stellafi.png",
+      "verified": false
+    },
+    "time": "now",
+    "content": "Hey guys, welcome to StellaFi!",
+    "likes": 13,
+    "replies": 0,
+    "retweets": 3,
+    "trending": false
+  },
+  {
+    "id": 1,
+    "user": {
+      "name": "Satoshi Nakamoto",
+      "handle": "@satoshi",
+      "avatar": "/satoshi.jpg",
+      "verified": true
+    },
+    "time": "2h",
+    "content": "The future of finance is decentralized. Building the infrastructure for a trustless world. 🚀\n\n#Bitcoin #Web3 #DeFi",
+    "image": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop",
+    "likes": 1247,
+    "replies": 89,
+    "retweets": 432,
+    "trending": true
+  },
+  {
+    "id": 2,
+    "user": {
+      "name": "Vitalik Buterin",
+      "handle": "@vitalikbuterin",
+      "avatar": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=50&h=50&fit=crop&crop=face",
+      "verified": true
+    },
+    "time": "4h",
+    "content": "Ethereum 2.0 is not just an upgrade, it's a revolution. 🔥 Proof of Stake will change everything we know about blockchain consensus.\n\nThread 🧵 1/12",
+    "likes": 892,
+    "replies": 156,
+    "retweets": 234,
+    "hasThread": true
+  },
+  {
+    "id": 3,
+    "user": {
+      "name": "CryptoQueen",
+      "handle": "@ueen",
+      "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Magnolia_grandiflora_-_flower_1.jpg/500px-Magnolia_grandiflora_-_flower_1.jpg",
+      "verified": false
+    },
+    "time": "6h",
+    "content": "Just made my first NFT sale! 🎨 The digital art revolution is real. Thanks to everyone who supported my work. Next drop coming soon! 💎\n\n#NFT #DigitalArt #Web3",
+    "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&h=400&fit=crop",
+    "likes": 234,
+    "replies": 45,
+    "retweets": 67,
+    "nft": true
+  },
+  {
+    "id": 4,
+    "user": {
+      "name": "DeFi Hunter",
+      "handle": "@defihunter",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face",
+      "verified": true
+    },
+    "time": "8h",
+    "content": "New yield farming opportunities just dropped! 🌾 APY rates are looking incredibly attractive this week. Remember: DYOR and never invest more than you can afford to lose.\n\n#DeFi #YieldFarming #CryptoTips",
+    "likes": 567,
+    "replies": 78,
+    "retweets": 145,
+    "trending": false
+  },
+  {
+    "id": 5,
+    "user": {
+      "name": "Web3 Developer",
+      "handle": "@web3dev",
+      "avatar": "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=50&h=50&fit=crop&crop=face",
+      "verified": false
+    },
+    "time": "12h",
+    "content": "Just shipped a new smart contract on Polygon! ⚡ Gas fees are so low it feels like magic. The future of dApps is multi-chain.\n\n#Polygon #SmartContracts #Web3Dev",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
+    "likes": 389,
+    "replies": 52,
+    "retweets": 98,
+    "trending": false
+  },
+  {
+    "id": 6,
+    "user": {
+      "name": "Stella Team",
+      "handle": "@stellafi",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&fit=crop&crop=face",
+      "verified": true
+    },
+    "time": "1d",
+    "content": "Excited to announce our new partnership with leading DeFi protocols! 🎉 This collaboration will bring even more utility to our platform. Stay tuned for major updates! 🔜\n\n#StellaFi #Partnership #DeFi",
+    "likes": 1123,
+    "replies": 234,
+    "retweets": 567,
+    "trending": true
+  },
+  {
+    "id": 7,
+    "user": {
+      "name": "Elon Musk",
+      "handle": "@elonmusk",
+      "avatar": "https://images.unsplash.com/photo-1552058544-f2b08422138a?w=50&h=50&fit=crop&crop=face",
+      "verified": true
+    },
+    "time": "2h",
+    "content": "Doge to the moon 🌕🚀",
+    "image": "https://images.unsplash.com/photo-1610912581811-d84a9243f582?w=600&h=400&fit=crop",
+    "likes": 5421,
+    "replies": 1204,
+    "retweets": 3402,
+    "trending": true
+  },
+  {
+    "id": 8,
+    "user": {
+      "name": "Chainlink Labs",
+      "handle": "@chainlink",
+      "avatar": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=50&h=50&fit=crop&crop=face",
+      "verified": true
+    },
+    "time": "3h",
+    "content": "New integration alert! 🔗 Chainlink Price Feeds are now live on Arbitrum mainnet. Secure, reliable, decentralized.\n\n#Chainlink #Arbitrum",
+    "likes": 742,
+    "replies": 88,
+    "retweets": 205,
+    "trending": false
+  },
+  {
+    "id": 9,
+    "user": {
+      "name": "CryptoMemes",
+      "handle": "@crypto_memes",
+      "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=50&h=50&fit=crop&crop=face",
+      "verified": false
+    },
+    "time": "5h",
+    "content": "Me checking my portfolio after saying \"I'll just hold through the dip\" 📉😭\n\n#HODL #CryptoHumor",
+    "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=400&fit=crop",
+    "likes": 1589,
+    "replies": 201,
+    "retweets": 632
+  },
+  {
+    "id": 10,
+    "user": {
+      "name": "Polygon Labs",
+      "handle": "@0xPolygon",
+      "avatar": "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?w=50&h=50&fit=crop&crop=face",
+      "verified": true
+    },
+    "time": "7h",
+    "content": "Polygon zkEVM just processed its first transaction on mainnet beta! ⚡ Scaling Ethereum for the masses.\n\n#zkEVM #Polygon",
+    "likes": 1204,
+    "replies": 142,
+    "retweets": 512,
+    "trending": true
+  },
+  {
+    "id": 11,
+    "user": {
+      "name": "Crypto Whale",
+      "handle": "@cryptowhale",
+      "avatar": "https://images.unsplash.com/photo-1557862921-37829c790f19?w=50&h=50&fit=crop&crop=face",
+      "verified": false
+    },
+    "time": "9h",
+    "content": "Someone just moved 45,000 BTC ($1.1B) from a cold wallet to Binance. 👀 Big move incoming?\n\n#Bitcoin #Crypto",
+    "likes": 892,
+    "replies": 324,
+    "retweets": 421
+  },
+  {
+    "id": 12,
+    "user": {
+      "name": "LayerZero Labs",
+      "handle": "@LayerZero_Labs",
+      "avatar": "data:image/png;base64,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",
+      "verified": true
+    },
+    "time": "12h",
+    "content": "The cross-chain future is here 🌐 Our protocol now supports 20+ chains for seamless interoperability.\n\n#LayerZero #Interoperability",
+    "likes": 567,
+    "replies": 77,
+    "retweets": 203
+  }
+]

@@ -3,7 +3,6 @@ import { useWallet } from '../provider/key.provider'
 import useAccountBalance from '../hooks/useAccountBalance'
 import { Wallet, RefreshCw, AlertCircle, ExternalLink } from 'lucide-react'
 import { NetworkDisplay } from '../components/NetworkDisplay'
-import '../utils/testnetVerify' // Import testnet verification utilities
 
 const WalletPage = () => {
   const [activeTab, setActiveTab] = useState('overview')
@@ -29,36 +28,12 @@ const WalletPage = () => {
     getBalance 
   } = useAccountBalance()
 
-  // Debug logging for wallet state
-  console.log('🔍 WALLET PAGE DEBUG:');
-  console.log('  publicKey:', publicKey);
-  console.log('  isWalletConnected:', isWalletConnected);
-  console.log('  walletLoading:', walletLoading);
-  console.log('  walletError:', walletError);
-  console.log('  balances:', balances);
-  console.log('  balanceLoading:', balanceLoading);
-  console.log('  balanceError:', balanceError);
-
-  // Auto-refresh balances when wallet connects
-  useEffect(() => {
-    if (isWalletConnected && publicKey && !balanceLoading) {
-      console.log('🔍 Wallet connected, refreshing balances...');
-      // Small delay to ensure wallet connection is stable
-      const timer = setTimeout(() => {
-        refreshBalances();
-      }, 500);
-      return () => clearTimeout(timer);
-    }
-  }, [isWalletConnected, publicKey]);
-
   // Calculate total portfolio value (simplified - just XLM for now)
   const calculateTotalValue = () => {
-    console.log('🔍 Calculating total value, balances:', balances);
     if (!balances.length) return { total: '$0.00', change: '+$0.00 (0%)', positive: true }
     
     // For demo purposes, assume 1 XLM = $0.12 (you can integrate with price API later)
     const xlmBalance = getBalance('XLM')
-    console.log('🔍 XLM Balance:', xlmBalance);
     const xlmPrice = 0.12
     const totalValue = parseFloat(xlmBalance) * xlmPrice
     
@@ -72,14 +47,9 @@ const WalletPage = () => {
   const walletBalance = calculateTotalValue()
 
   // Convert balances to asset format for display
-  console.log('🔍 Raw balances from hook:', balances);
-  console.log('🔍 Balance loading state:', balanceLoading);
-  console.log('🔍 Balance error:', balanceError);
-  
-  const assets = balances.map((balance, index) => {
-    console.log('🔍 Processing balance:', balance);
+  const assets = balances.map(balance => {
     const assetCode = balance.asset_code || 'XLM'
-    const amount = parseFloat(balance.balance || 0).toFixed(6) // Show more decimals for crypto
+    const amount = parseFloat(balance.balance).toFixed(2)
     
     // Demo prices and changes (integrate with real price API later)
     const demoPrices = {
@@ -93,7 +63,6 @@ const WalletPage = () => {
     const value = (parseFloat(amount) * priceInfo.price).toFixed(2)
     
     return {
-      id: `${assetCode}-${index}`, // Add unique key
       name: balance.asset_code ? `${balance.asset_issuer?.slice(0, 8)}...${balance.asset_issuer?.slice(-4)}` : 'Stellar Lumens',
       symbol: assetCode,
       amount: amount,
@@ -102,7 +71,7 @@ const WalletPage = () => {
       positive: priceInfo.positive,
       balance: balance
     }
-  });
+  })
 
   // Demo activity (you can extend this to fetch from Stellar transaction history)
   const recentActivity = [
@@ -326,186 +295,171 @@ const WalletPage = () => {
 
           {/* Action Buttons Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <ActionButton 
-              icon={
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" />
-                </svg>
-              } 
-              label="Buy" 
-              color="bg-green-600" 
-            />
-            <ActionButton 
-              icon={
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M8 5a1 1 0 100 2h5.586l-1.293 1.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L13.586 5H8zM12 15a1 1 0 100-2H6.414l1.293-1.293a1 1 0 10-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L6.414 15H12z" />
-                </svg>
-              } 
-              label="Trade" 
-              color="bg-twitter-blue" 
-            />
-            <ActionButton 
-              icon={
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
-                </svg>
-              } 
-              label="Send" 
-              color="bg-purple-600" 
-            />
-            <ActionButton 
-              icon={
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 10.828V15a1 1 0 102 0v-4.172l1.293 1.293a1 1 0 001.414-1.414l-3-3z" clipRule="evenodd" />
-                </svg>
-              } 
-              label="Request" 
-              color="bg-orange-600" 
-            />
-          </div>
+        <ActionButton 
+          icon={
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" />
+            </svg>
+          } 
+          label="Buy" 
+          color="bg-green-600" 
+        />
+        <ActionButton 
+          icon={
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M8 5a1 1 0 100 2h5.586l-1.293 1.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L13.586 5H8zM12 15a1 1 0 100-2H6.414l1.293-1.293a1 1 0 10-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L6.414 15H12z" />
+            </svg>
+          } 
+          label="Trade" 
+          color="bg-twitter-blue" 
+        />
+        <ActionButton 
+          icon={
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
+            </svg>
+          } 
+          label="Send" 
+          color="bg-purple-600" 
+        />
+        <ActionButton 
+          icon={
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 10.828V15a1 1 0 102 0v-4.172l1.293 1.293a1 1 0 001.414-1.414l-3-3z" clipRule="evenodd" />
+            </svg>
+          } 
+          label="Request" 
+          color="bg-orange-600" 
+        />
+      </div>
 
-          {/* Funding CTA */}
-          <div className="bg-gradient-to-r from-twitter-blue to-purple-600 rounded-2xl p-6 mb-8">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-xl font-bold text-white mb-2">
-                  {networkDetails?.network?.includes('test') || networkDetails?.networkPassphrase?.includes('Test') || 
-                   network?.includes?.('test') || network?.includes?.('Test') ? 
-                    'Get Testnet XLM' : 'Fund Your Wallet'}
-                </h3>
-                <p className="text-blue-100">
-                  {networkDetails?.network?.includes('test') || networkDetails?.networkPassphrase?.includes('Test') || 
-                   network?.includes?.('test') || network?.includes?.('Test') ? 
-                    'Get free testnet XLM from Stellar Laboratory to test the platform' :
-                    'Add money to start trading and sending crypto'}
-                </p>
-              </div>
-              <button 
-                className="bg-white text-twitter-blue font-bold py-3 px-6 rounded-xl hover:bg-twitter-extraLightGray transition-colors"
-                onClick={() => {
-                  const isTestnet = networkDetails?.network?.includes('test') || 
-                                   networkDetails?.networkPassphrase?.includes('Test') || 
-                                   network?.includes?.('test') || 
-                                   network?.includes?.('Test');
-                  if (isTestnet) {
-                    window.open('https://laboratory.stellar.org/#account-creator', '_blank');
-                  }
-                }}
-              >
-                {networkDetails?.network?.includes('test') || networkDetails?.networkPassphrase?.includes('Test') || 
-                 network?.includes?.('test') || network?.includes?.('Test') ? 
-                  'Get Testnet XLM' : 'Add Funds'}
+      {/* Funding CTA */}
+      <div className="bg-gradient-to-r from-twitter-blue to-purple-600 rounded-2xl p-6 mb-8">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-xl font-bold text-white mb-2">
+              {networkDetails?.network?.includes('test') || networkDetails?.networkPassphrase?.includes('Test') || 
+               network?.includes?.('test') || network?.includes?.('Test') ? 
+                'Get Testnet XLM' : 'Fund Your Wallet'}
+            </h3>
+            <p className="text-blue-100">
+              {networkDetails?.network?.includes('test') || networkDetails?.networkPassphrase?.includes('Test') || 
+               network?.includes?.('test') || network?.includes?.('Test') ? 
+                'Get free testnet XLM from Stellar Laboratory to test the platform' :
+                'Add money to start trading and sending crypto'}
+            </p>
+          </div>
+          <button 
+            className="bg-white text-twitter-blue font-bold py-3 px-6 rounded-xl hover:bg-twitter-extraLightGray transition-colors"
+            onClick={() => {
+              const isTestnet = networkDetails?.network?.includes('test') || 
+                               networkDetails?.networkPassphrase?.includes('Test') || 
+                               network?.includes?.('test') || 
+                               network?.includes?.('Test');
+              if (isTestnet) {
+                window.open('https://laboratory.stellar.org/#account-creator', '_blank');
+              }
+            }}
+          >
+            {networkDetails?.network?.includes('test') || networkDetails?.networkPassphrase?.includes('Test') || 
+             network?.includes?.('test') || network?.includes?.('Test') ? 
+              'Get Testnet XLM' : 'Add Funds'}
+          </button>
+        </div>
+      </div>
+
+      {/* Tabs */}
+      <div className="flex space-x-1 bg-twitter-darker rounded-lg p-1 mb-6 max-w-md">
+        {['overview', 'activity'].map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+              activeTab === tab
+                ? 'bg-twitter-blue text-white'
+                : 'text-twitter-darkGray hover:text-white'
+            }`}
+          >
+            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+          </button>
+        ))}
+      </div>
+
+      {/* Content */}
+      {activeTab === 'overview' && (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Assets */}
+          <div className="bg-twitter-darker rounded-2xl p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-bold text-white">Your Assets</h3>
+              <button className="text-twitter-blue hover:text-twitter-darkBlue transition-colors">
+                View All
               </button>
             </div>
-          </div>
-
-          {/* Tabs */}
-          <div className="flex space-x-1 bg-twitter-darker rounded-lg p-1 mb-6 max-w-md">
-            {['overview', 'activity'].map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
-                  activeTab === tab
-                    ? 'bg-twitter-blue text-white'
-                    : 'text-twitter-darkGray hover:text-white'
-                }`}
-              >
-                {tab.charAt(0).toUpperCase() + tab.slice(1)}
-              </button>
-            ))}
-          </div>
-
-          {/* Content */}
-          {activeTab === 'overview' && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Assets */}
-              <div className="bg-twitter-darker rounded-2xl p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-bold text-white">Your Assets</h3>
-                  <button className="text-twitter-blue hover:text-twitter-darkBlue transition-colors">
-                    View All
-                  </button>
-                </div>
-                
-                <div className="space-y-3">
-                  {balanceLoading ? (
-                    // Loading state
-                    <div className="flex items-center justify-center py-8">
-                      <div className="flex items-center space-x-2 text-twitter-blue">
-                        <RefreshCw className="w-5 h-5 animate-spin" />
-                        <span>Loading your assets...</span>
-                      </div>
-                    </div>
-                  ) : assets.length > 0 ? (
-                    // Assets available
-                    assets.map((asset) => (
-                      <AssetCard key={asset.id} asset={asset} />
-                    ))
-                  ) : balanceError ? (
-                    // Error state
-                    <div className="text-center py-8">
-                      <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <AlertCircle className="w-8 h-8 text-red-400" />
-                      </div>
-                      <p className="text-red-400 mb-2">Error loading assets</p>
-                      <p className="text-twitter-darkGray text-sm mb-4">{balanceError}</p>
-                      <button 
-                        onClick={refreshBalances}
-                        className="bg-twitter-blue text-white px-4 py-2 rounded-lg hover:bg-twitter-darkBlue transition-colors"
-                      >
-                        Try Again
-                      </button>
-                    </div>
-                  ) : (
-                    // No assets found
-                    <div className="text-center py-8">
-                      <div className="w-16 h-16 bg-twitter-surface rounded-full flex items-center justify-center mx-auto mb-4">
-                        <Wallet className="w-8 h-8 text-twitter-darkGray" />
-                      </div>
-                      <p className="text-twitter-darkGray mb-2">No assets found</p>
-                      <p className="text-twitter-darkGray text-sm">
-                        Your wallet appears to be empty. Add some XLM or other Stellar assets to get started.
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Portfolio Chart Placeholder */}
-              <div className="bg-twitter-darker rounded-2xl p-6">
-                <h3 className="text-xl font-bold text-white mb-4">Portfolio Performance</h3>
-                <div className="h-64 bg-twitter-background rounded-xl flex items-center justify-center">
-                  <div className="text-center text-twitter-darkGray">
-                    <div className="flex justify-center mb-2">
-                      <svg className="w-16 h-16 text-twitter-blue" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <p>Portfolio chart will be displayed here</p>
+            
+            <div className="space-y-3">
+              {balanceLoading ? (
+                // Loading state
+                <div className="flex items-center justify-center py-8">
+                  <div className="flex items-center space-x-2 text-twitter-blue">
+                    <RefreshCw className="w-5 h-5 animate-spin" />
+                    <span>Loading your assets...</span>
                   </div>
                 </div>
-              </div>
+              ) : assets.length > 0 ? (
+                // Assets available
+                assets.map((asset, index) => (
+                  <AssetCard key={index} asset={asset} />
+                ))
+              ) : (
+                // No assets found
+                <div className="text-center py-8">
+                  <div className="w-16 h-16 bg-twitter-surface rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Wallet className="w-8 h-8 text-twitter-darkGray" />
+                  </div>
+                  <p className="text-twitter-darkGray mb-2">No assets found</p>
+                  <p className="text-twitter-darkGray text-sm">
+                    Your wallet appears to be empty. Add some XLM or other Stellar assets to get started.
+                  </p>
+                </div>
+              )}
             </div>
-          )}
+          </div>
 
-          {activeTab === 'activity' && (
-            <div className="bg-twitter-darker rounded-2xl p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-bold text-white">Recent Activity</h3>
-                <button className="text-twitter-blue hover:text-twitter-darkBlue transition-colors">
-                  View All
-                </button>
-              </div>
-              
-              <div className="space-y-2">
-                {recentActivity.map((activity, index) => (
-                  <ActivityItem key={index} activity={activity} />
-                ))}
+          {/* Portfolio Chart Placeholder */}
+          <div className="bg-twitter-darker rounded-2xl p-6">
+            <h3 className="text-xl font-bold text-white mb-4">Portfolio Performance</h3>
+            <div className="h-64 bg-twitter-background rounded-xl flex items-center justify-center">
+              <div className="text-center text-twitter-darkGray">
+                <div className="flex justify-center mb-2">
+                  <svg className="w-16 h-16 text-twitter-blue" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <p>Portfolio chart will be displayed here</p>
               </div>
             </div>
-          )}
-        </>
+          </div>
+        </div>
+      )}
+
+      {activeTab === 'activity' && (
+        <div className="bg-twitter-darker rounded-2xl p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xl font-bold text-white">Recent Activity</h3>
+            <button className="text-twitter-blue hover:text-twitter-darkBlue transition-colors">
+              View All
+            </button>
+          </div>
+          
+          <div className="space-y-2">
+            {recentActivity.map((activity, index) => (
+              <ActivityItem key={index} activity={activity} />
+            ))}
+          </div>
+        </div>
+      )}
+      </>
       )}
     </div>
   )
